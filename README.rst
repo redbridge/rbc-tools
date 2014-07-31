@@ -25,7 +25,11 @@ Getting started
     endpoint = api.rbcloud.net
     EOF
 
-4. Now you should have access to a number of command line scripts, prefixed with rbc-*
+4. install rbc-tools using pip (or easy_install)::
+
+   pip install rbc-tools
+
+5. Now you should have access to a number of command line scripts, prefixed with rbc-*
 
 Examples
 ########
