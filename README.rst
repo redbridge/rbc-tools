@@ -53,8 +53,8 @@ Development of rbc-tools takes place on github (https://github.com/redbridge/rbc
 History
 =======
 
-0.1.6 (2014-07-31)
-------------------
+0.1.17 (2014-07-31)
+-------------------
 
 - First pypi release
 

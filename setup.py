@@ -13,7 +13,7 @@ data_files =  conf_files + dirs
 
 setup(
     name=name,
-    version='0.1.16',
+    version='0.1.17',
     author='RedBridge AB',
     author_email='info@redbridge.se',
     data_files = data_files,
