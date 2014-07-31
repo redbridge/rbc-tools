@@ -31,6 +31,10 @@ Getting started
 
 5. Now you should have access to a number of command line scripts, prefixed with rbc-*
 
+Note that you can also set api key and secret key by using environment variables::
+
+    export RBC_APIKEY=XXXXX; export RBC_SECRETKEY=XXXX
+
 Examples
 ########
 
