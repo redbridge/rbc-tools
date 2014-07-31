@@ -1,3 +1,4 @@
+import os, re
 from setuptools import setup, find_packages
 from glob import glob
 
