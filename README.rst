@@ -25,17 +25,20 @@ Getting started
     endpoint = api.rbcloud.net
     EOF
 
-4. Now you should have acces to a number of command line scripts, prefixed with rbc-*
+4. Now you should have access to a number of command line scripts, prefixed with rbc-*
 
 Examples
 ########
 
 Create a ssh key pair::
+
     rbc-sshkeys generate my-keypair > ~/.ssh/my-keypair_id_rsa
 
 To deploy 3 small instances in the RedBridge Cloud, using a ssh key::
 
-    rbc-instances deploy -i 3 -g test -t rbc/ubuntu-14.04-server-cloudimg-amd64-20GB-201461111 -o small -w default -s my-keypair my-instances
+    rbc-instances deploy -i 3 -g test \
+        -t rbc/ubuntu-14.04-server-cloudimg-amd64-20GB-201461111 \
+        -o small -w default -s my-keypair my-instances
 
 
 Changelog
