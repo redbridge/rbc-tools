@@ -6,6 +6,15 @@ name = 'rbc-tools'
 with open('requirements.txt', 'r') as f:
         requires = [x.strip() for x in f if x.strip()]
 
+def read(*parts):
+    """
+    Build an absolute path from *parts* and and return the contents of the
+    resulting file.  Assume UTF-8 encoding.
+    """
+    here = os.path.abspath(os.path.dirname(__file__))
+    with codecs.open(os.path.join(here, *parts), 'rb', 'utf-8') as f:
+        return f.read()
+
 conf_files = [ ('conf', glob('conf/*.cfg')) ]
 dirs = [('log', [])]
 data_files =  conf_files + dirs
