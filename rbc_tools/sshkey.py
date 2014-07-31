@@ -15,6 +15,7 @@ Options:
 
 """
 import sys, operator, os, random, string
+import molnctrl
 from tabulate import tabulate
 from config import read_config
 from connection import conn
@@ -63,9 +64,13 @@ def main():
     if args['list']:
         res = c.list_sshkeypairs()
     if args['generate']:
-        res = c.create_sshkeypair(name=args['NAME'])
-        print res['keypair']['privatekey']
-        sys.exit(0)
+        try:
+            res = c.create_sshkeypair(name=args['NAME'])
+            print res.privatekey
+            sys.exit(0)
+        except molnctrl.csexceptions.ResponseError as e:
+            print "Unable to create ssh key: %s" % e[1]
+            sys.exit(1)
     if args['delete']:
         try:
             res = c.delete_sshkeypair(name=args['NAME'])
