@@ -49,7 +49,3 @@ To deploy 3 small instances in the RedBridge Cloud, using a ssh key::
         -o small -w default -s my-keypair my-instances
 
 
-Changelog
-=========
-
-* 0.1.0 2014-07-31 Initial release

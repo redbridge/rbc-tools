@@ -12,11 +12,14 @@ data_files =  conf_files + dirs
 
 setup(
     name=name,
-    version='0.1',
+    version='0.1.3',
     author='RedBridge AB',
     author_email='info@redbridge.se',
     data_files = data_files,
     url='http://github.com/redbridge/rbc-tools',
+    long_description=(read('README.rst') + '\n\n' +
+                      read('HISTORY.rst') + '\n\n' +
+                      read('AUTHORS.rst')),
     packages=['rbc_tools'],
     scripts=glob('bin/*'),
     install_requires=requires,
