@@ -1,4 +1,3 @@
-=========================================
 rbc-tools
 =========================================
 
@@ -11,7 +10,7 @@ The tools are tested on MacOS X and Linux only at the moment, but should also wo
 *The tools are in a early beta stage* so please report any bugs to support@redbridge.se or as issues on `github <https://github.com/redbridge/rbc-tools/issues>`_
 
 Getting started
-###############
+--------------
 
 1. Register for an account on `RedBridge Portal <https://portal.redbridge.se/account/signup/>`_
 2. Get your access key and secret key from your account page in the portal.
@@ -36,7 +35,7 @@ Note that you can also set api key and secret key by using environment variables
     export RBC_APIKEY=XXXXX; export RBC_SECRETKEY=XXXX
 
 Examples
-########
+--------------
 
 Create a ssh key pair::
 
