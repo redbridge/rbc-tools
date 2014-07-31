@@ -7,29 +7,20 @@ name = 'rbc-tools'
 with open('requirements.txt', 'r') as f:
         requires = [x.strip() for x in f if x.strip()]
 
-def read(*parts):
-    """
-    Build an absolute path from *parts* and and return the contents of the
-    resulting file.  Assume UTF-8 encoding.
-    """
-    here = os.path.abspath(os.path.dirname(__file__))
-    with codecs.open(os.path.join(here, *parts), 'rb', 'utf-8') as f:
-        return f.read()
-
 conf_files = [ ('conf', glob('conf/*.cfg')) ]
 dirs = [('log', [])]
 data_files =  conf_files + dirs
 
 setup(
     name=name,
-    version='0.1.6',
+    version='0.1.16',
     author='RedBridge AB',
     author_email='info@redbridge.se',
     data_files = data_files,
     url='http://github.com/redbridge/rbc-tools',
-    long_description=(read('README.rst') + '\n\n' +
-                      read('HISTORY.rst') + '\n\n' +
-                      read('AUTHORS.rst')),
+    license="Apache 2.0",
+    description='Command line tools for managing RedBridge Cloud',
+    long_description=open("README.rst").read(),
     packages=['rbc_tools'],
     scripts=glob('bin/*'),
     install_requires=requires,

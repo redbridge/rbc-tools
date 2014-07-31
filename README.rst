@@ -1,5 +1,6 @@
-rbc-tools
-=========================================
+=================================
+rbc-tools: Manage RedBridge Cloud
+=================================
 
 rbc-tools are command line tools for managing RedBridge Cloud.
 
@@ -10,7 +11,7 @@ The tools are tested on MacOS X and Linux only at the moment, but should also wo
 *The tools are in a early beta stage* so please report any bugs to support@redbridge.se or as issues on `github <https://github.com/redbridge/rbc-tools/issues>`_
 
 Getting started
---------------
+---------------
 
 1. Register for an account on `RedBridge Portal <https://portal.redbridge.se/account/signup/>`_
 2. Get your access key and secret key from your account page in the portal.
@@ -24,9 +25,7 @@ Getting started
     endpoint = api.rbcloud.net
     EOF
 
-4. install rbc-tools using pip (or easy_install)::
-
-   pip install rbc-tools
+4. Install rbc-tools using pip (or easy_install)
 
 5. Now you should have access to a number of command line scripts, prefixed with rbc-*
 
@@ -43,8 +42,35 @@ Create a ssh key pair::
 
 To deploy 3 small instances in the RedBridge Cloud, using a ssh key::
 
-    rbc-instances deploy -i 3 -g test \
-        -t rbc/ubuntu-14.04-server-cloudimg-amd64-20GB-201461111 \
-        -o small -w default -s my-keypair my-instances
+    rbc-instances deploy -i 3 -g test -t rbc/ubuntu-14.04-server-cloudimg-amd64-20GB-201461111 -o small -w default -s my-keypair my-instances
 
 
+Development
+-----------
+
+Development of rbc-tools takes place on github (https://github.com/redbridge/rbc-tools).
+
+History
+=======
+
+0.1.6 (2014-07-31)
+------------------
+
+- First pypi release
+
+0.1.0 (2014-07-31)
+------------------
+
+- Initial release.
+
+Credits
+=======
+
+"rbc-tools" is written and maintained by RedBridge AB.
+
+Contributors
+------------
+
+- `cldmnky <https://github.com/cldmnky>`_
+
+Please add yourself here alphabetically when you submit your first pull request.
