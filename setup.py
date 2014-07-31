@@ -1,4 +1,4 @@
-import os, re
+import os, re, codecs
 from setuptools import setup, find_packages
 from glob import glob
 
