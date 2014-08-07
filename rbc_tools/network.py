@@ -45,7 +45,16 @@ def get_snat(c, id):
     if ip:
         return ','.join([x.ipaddress for x in ip])
     else:
-        return ''
+        # Try to get VPC snat
+        try:
+            ip = c.list_publicipaddresses(vpcid=id, issourcenat="true")
+            if ip:
+                return ','.join([x.ipaddress for x in ip])
+            else:
+              
+                return ''
+        except:
+            return ''
 
 def has_vpn(c, id):
     v = c.list_remoteaccessvpns(networkid=id)
