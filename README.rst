@@ -52,6 +52,10 @@ Development of rbc-tools takes place on github (https://github.com/redbridge/rbc
 
 History
 =======
+0.1.18 (2014-08-07)
+-------------------
+
+- Fix broken network list when using VPC's
 
 0.1.17 (2014-07-31)
 -------------------

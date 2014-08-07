@@ -51,7 +51,6 @@ def get_snat(c, id):
             if ip:
                 return ','.join([x.ipaddress for x in ip])
             else:
-              
                 return ''
         except:
             return ''
