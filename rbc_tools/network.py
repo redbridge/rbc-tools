@@ -45,7 +45,7 @@ def get_snat(c, id):
     if ip:
         return ','.join([x.ipaddress for x in ip])
     else:
-        return ['N/A']
+        return ''
 
 def has_vpn(c, id):
     v = c.list_remoteaccessvpns(networkid=id)
@@ -71,6 +71,8 @@ def print_tabulate(res, noheader=False, short=False):
     c = conn(config)
     tbl = []
     for i in res:
+        if not i.__dict__.has_key('networkofferingname'):
+            i.__setattr__('networkofferingname', 'VPC')
         if short:
             tbl.append([i.name])
         else:
@@ -92,7 +94,6 @@ def print_tabulate(res, noheader=False, short=False):
         tbl.insert(0, ['name', 'zone', 'offering', 'cidr', 'domain', 'snat', 'vpn', 'state'])
         print tabulate(tbl, headers="firstrow")
 
-
 def main():
     config = read_config()
     c = conn(config)
@@ -102,6 +103,10 @@ def main():
         if args['--search']:
             list_args['keyword'] = args['--search']
         res = c.list_networks(**list_args)
+        try:
+            res += c.list_vpcs(**list_args)
+        except:
+            pass
     if args['delete']:
         id = get_network(c, args['NETWORK'])[0].id
         if id:
