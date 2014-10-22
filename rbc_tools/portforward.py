@@ -12,7 +12,7 @@ Options:
   --short           Short display, only shows name
   --network=NETWORK A network name, default public IP for the specified net is used 
   --pubip=IPADDRESS A public IP address
-  --forward=RULE    A forward rule in the format proto/port (tcp/22)
+  --forward=RULE    A forward rule in the format proto/publicport:privateport (tcp/22:22)
   -h --help         Show this screen.
   --version         Show version.
 
@@ -75,6 +75,7 @@ def print_tabulate(res, noheader=False, short=False, t='list'):
                     i.ipaddress,
                     c.list_networks(id=i.networkid)[0].name,
                     i.publicport,
+                    i.privateport,
                     i.protocol,
                     i.virtualmachinedisplayname,
                     i.state,
@@ -85,7 +86,7 @@ def print_tabulate(res, noheader=False, short=False, t='list'):
     if (noheader or short):
         print tabulate(tbl, tablefmt="plain")
     else:
-        tbl.insert(0, ['ip', 'network', 'port', 'proto',
+        tbl.insert(0, ['ip', 'network', 'public port', 'private port', 'proto',
             'vmname', 'state', 'uuid'])
         print tabulate(tbl, headers="firstrow")
 
@@ -125,11 +126,12 @@ def main():
         try:
             for f in args['--forward']:
                 proto_port = f.split('/')
+                ports=proto_port[1].split(':')
                 async = c.create_portforwardingrule(
                     ipaddressid=ipid,
                     virtualmachineid=vmid,
-                    privateport=proto_port[1],
-                    publicport=proto_port[1],
+                    publicport=ports[0],
+                    privateport=ports[1],
                     protocol=proto_port[0])
                 res = [async.get_result()]
                 if not res:
