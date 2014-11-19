@@ -3,12 +3,12 @@
 """Manage instances in RedBridge Cloud
 
 Usage:
-  rbc-instances list [-n] [--short ] [--search=SEARCH] [--group=GROUP] [--tags=TAGS]
-  rbc-instances get [-n] INSTANCE
-  rbc-instances destroy [-n] INSTANCE
-  rbc-instances stop [-n] INSTANCE
-  rbc-instances start [-n] INSTANCE
-  rbc-instances reboot [-n] INSTANCE
+  rbc-instances list [-n] [--short ] [--search=SEARCH] [--group=GROUP] [--tags=TAGS]  [-w NETWORK]
+  rbc-instances get [-n] [-w NETWORK] INSTANCE
+  rbc-instances destroy [-n] [-w NETWORK] INSTANCE
+  rbc-instances stop [-n] [-w NETWORK] INSTANCE
+  rbc-instances start [-n] [-w NETWORK] INSTANCE
+  rbc-instances reboot [-n] [-w NETWORK] INSTANCE
   rbc-instances deploy [-n] [--nowait] [-i NUM] [-g GROUP] [-t TEMPLATE]
                        [-o OFFERING] [-w NETWORK] [-z ZONE] [-s SSHKEY]
                        [-d USER-DATA | -f FILE] [--tags=TAGS] INSTANCE
@@ -188,7 +188,7 @@ def start_vm(c, id):
 
 def stop_vm(c, id):
     try:
-        res = c.stop_virtualmachine(id=id)[0]
+        res = c.stop_virtualmachine(id=id)
     except Exception as e:
         print "error stopping instance: %s"  % e
         sys.exit(1)
@@ -258,20 +258,44 @@ def main():
             sys.exit(1)
     elif args['destroy']:
         try:
-            id = c.list_virtualmachines(name=args['INSTANCE'])[0].id
-            res = destroy_vm(c, id)
+            id = c.list_virtualmachines(name=args['INSTANCE'])
+            if len(id) == 1:
+                res = destroy_vm(c, id[0].id)
+            else:
+                # Multiple VMs returned
+                if args['--network']:
+                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, a['--network'])[0].id)
+                    res = destroy_vm(c, id[0].id)
+                else:
+                    print "Multiple instances with name: %s found, please supply a network name" % args['INSTANCE']
         except Exception as e:
             print "Error destroying instance: %s" % e
     elif args['stop']:
         try:
-            id = c.list_virtualmachines(name=args['INSTANCE'])[0].id
-            res = stop_vm(c, id)
+            id = c.list_virtualmachines(name=args['INSTANCE'])
+            if len(id) == 1:
+                res = stop_vm(c, id[0].id)
+            else:
+                # Multiple VMs returned
+                if args['--network']:
+                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, a['--network'])[0].id)
+                    res = stop_vm(c, id[0].id)
+                else:
+                    print "Multiple instances with name: %s found, please supply a network name" % args['INSTANCE']
         except Exception as e:
             print "Error stopping instance: %s" % e
     elif args['start']:
         try:
-            id = c.list_virtualmachines(name=args['INSTANCE'])[0].id
-            res = start_vm(c, id)
+            id = c.list_virtualmachines(name=args['INSTANCE'])
+            if len(id) == 1:
+                res = start_vm(c, id[0].id)
+            else:
+                # Multiple VMs returned
+                if args['--network']:
+                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, a['--network'])[0].id)
+                    res = start_vm(c, id[0].id)
+                else:
+                    print "Multiple instances with name: %s found, please supply a network name" % args['INSTANCE']
         except Exception as e:
             print "Error starting instance: %s" % e
     elif args['list']:
