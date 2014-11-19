@@ -42,8 +42,12 @@ def get_network_from_name(c, name):
         print "Unable to get network, got: %s" % ret
         sys.exit(1)
 
-def get_instance_from_name(c, name):
-    ret = c.list_virtualmachines(keyword=name, name=name)
+
+def get_instance_from_name(c, name, networkid=None):
+    if networkid:
+        ret = c.list_virtualmachines(keyword=name, name=name, networkid=networkid)
+    else:
+        ret = c.list_virtualmachines(keyword=name, name=name)
     if len(ret) == 1:
         return ret[0]
     else:
@@ -107,9 +111,11 @@ def main():
         try:
             if args['--pubip']:
                 ipid = get_id_from_address(c, args['--pubip']).id
+                network_id = get_id_from_address(c, args['--pubip']).networkid
             elif args['--network']:
                 ipid = get_default_snat_id(c, get_network_from_name(c,
                     args['--network']).id)
+                network_id = get_network_from_name(c, args['--network']).id
             else:
                 print "Either --network or --pubip must be specified"
                 sys.exit(1)
@@ -118,7 +124,7 @@ def main():
             sys.exit(1)
 
         try:
-            vmid = get_instance_from_name(c, args['INSTANCE']).id
+            vmid = get_instance_from_name(c, args['INSTANCE'], networkid=network_id).id
         except Exception as e:
             print "Unable to find specified instance: %s" % e
             sys.exit(1)
