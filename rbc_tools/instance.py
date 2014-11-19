@@ -264,7 +264,7 @@ def main():
             else:
                 # Multiple VMs returned
                 if args['--network']:
-                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, a['--network'])[0].id)
+                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, args['--network'])[0].id)
                     res = destroy_vm(c, id[0].id)
                 else:
                     print "Multiple instances with name: %s found, please supply a network name" % args['INSTANCE']
@@ -278,7 +278,7 @@ def main():
             else:
                 # Multiple VMs returned
                 if args['--network']:
-                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, a['--network'])[0].id)
+                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, args['--network'])[0].id)
                     res = stop_vm(c, id[0].id)
                 else:
                     print "Multiple instances with name: %s found, please supply a network name" % args['INSTANCE']
@@ -292,7 +292,7 @@ def main():
             else:
                 # Multiple VMs returned
                 if args['--network']:
-                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, a['--network'])[0].id)
+                    id = c.list_virtualmachines(name=args['INSTANCE'], networkid=get_network(c, args['--network'])[0].id)
                     res = start_vm(c, id[0].id)
                 else:
                     print "Multiple instances with name: %s found, please supply a network name" % args['INSTANCE']
