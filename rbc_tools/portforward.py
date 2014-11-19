@@ -72,6 +72,8 @@ def print_tabulate(res, noheader=False, short=False, t='list'):
     tbl = []
     for i in res:
         if t == 'list':
+            if not i.__dict__.has_key('virtualmachinename'):
+                i.__setattr__('virtualmachinename', 'None')
             if short:
                 tbl.append([i.id])
             else:
@@ -81,7 +83,7 @@ def print_tabulate(res, noheader=False, short=False, t='list'):
                     i.publicport,
                     i.privateport,
                     i.protocol,
-                    i.virtualmachinedisplayname,
+                    i.virtualmachinename,
                     i.state,
                     i.id,
                 ])
