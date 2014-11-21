@@ -35,6 +35,7 @@ setup(
                         'rbc-ipaddresses=rbc_tools.ipaddress:main',
                         'rbc-staticnat=rbc_tools.staticnat:main',
                         'rbc-portforward=rbc_tools.portforward:main',
+                        'rbc-egress=rbc_tools.egress:main',
                         'rbc-setup=rbc_tools.config:main',
                 ],
     }
