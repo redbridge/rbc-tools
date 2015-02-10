@@ -80,6 +80,8 @@ def print_tabulate(res, noheader=False, short=False):
     for i in res:
         if not i.__dict__.has_key('passwordenabled'):
             i.__setattr__('passwordenabled', 0)
+        if not i.__dict__.has_key('created'):
+            i.__setattr__('created', '')
         if i.passwordenabled == 1:
             passw = "Yes"
         else:
@@ -110,7 +112,7 @@ def main():
     if not args['FILTER']:
         args['FILTER'] = 'executable' 
     if not args['FILTER'] in ["featured", "self", "selfexecutable","sharedexecutable","executable", "community"]:
-        print "Not a valid template filter"
+        print "%s is not a valid template filter" % rgs['FILTER']
         sys.exit(1)
     
     if args['list']:
@@ -121,5 +123,5 @@ def main():
     if res:
         print_tabulate(res, noheader=args['--noheader'], short=args['--short'])
     else:
-        print "Unable to execute command"
+        print "Could not find any templates, try listing featured templates using `rbc-templates list featured`"
         sys.exit(1)

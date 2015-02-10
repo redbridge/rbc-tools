@@ -246,7 +246,7 @@ def print_tabulate(res, noheader=False, short=False):
 
 def main():
     config = read_config()
-    c = conn(config)
+    c = conn(config, method='post')
     args = docopt(__doc__, version='%s %s' % (__cli_name__, __version__))
     res = False
     res_get = False
@@ -309,6 +309,6 @@ def main():
     if res:
         print_tabulate(res, noheader=args['--noheader'], short=args['--short'])
     else:
-        print "Unable to execute command"
+        print "No virtual machines found, deploy new machines using `rbc-instances deploy`"
         sys.exit(1)
 
