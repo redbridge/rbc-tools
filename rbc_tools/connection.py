@@ -3,7 +3,7 @@
 import os
 import molnctrl
 
-def conn(config, method="get"):
+def conn(config, method="get", timeout=120):
     rbc_secret = os.environ.get("RBC_SECRETKEY") or config.get('main', 'secretkey')
     rbc_key = os.environ.get("RBC_APIKEY")  or config.get('main', 'apikey')
     try:

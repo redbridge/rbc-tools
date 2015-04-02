@@ -27,6 +27,8 @@ from config import read_config
 from connection import conn
 from zone import get_zone
 from docopt import docopt
+from simplejson import JSONDecodeError
+from molnctrl.csexceptions import *
 
 __cli_name__="rbc-networks"
 from rbc_tools import __version__
@@ -104,7 +106,7 @@ def print_tabulate(res, noheader=False, short=False):
 
 def main():
     config = read_config()
-    c = conn(config)
+    c = conn(config, timeout=5)
     args = docopt(__doc__, version='%s %s' % (__cli_name__, __version__))
     if args['list']:
         list_args ={'listall': 'true'}
@@ -137,10 +139,16 @@ def main():
         else:
             zone = get_zone(c)[0]
             create_args['zoneid'] = zone.id
-            res = c.create_network(**create_args)
-            if res:
-                print "network created"
-                sys.exit(0)
+            try:
+                c.create_network(**create_args)
+                res = c.list_networks(keyword=args['NETWORK'])
+            except JSONDecodeError:
+                res = c.list_networks(keyword=args['NETWORK'])
+            except ResponseError as e:
+                print "Error creating network: %s" % e[1]
+                sys.exit(1)
+            if not res:
+                print "Error creating network"
 
     if res:
         print_tabulate(res, noheader=args['--noheader'], short=args['--short'])
