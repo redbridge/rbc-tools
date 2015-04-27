@@ -30,16 +30,18 @@ from docopt import docopt
 __cli_name__="rbc-templates"
 from rbc_tools import __version__
 
+
 def list_templates(c, args):
-    list_args = {} 
+    list_args = {}
     if args['--search']:
         list_args['keyword'] = args['--search']
     list_args['templatefilter'] = args['FILTER']
     list_args['listall'] = "true"
     return c.list_templates(**list_args)
 
+
 def delete_template(c, args):
-    list_args = {} 
+    list_args = {}
     list_args['id'] = get_template(c, args['TEMPLATE'])[0].id
     job = c.delete_template(**list_args)
     if job.get_result() == 'succeded':
@@ -49,7 +51,8 @@ def delete_template(c, args):
         print "Error deleting template"
         sys.exit(1)
 
-def get_template_from_id(c ,id):
+
+def get_template_from_id(c, id):
     try:
         return c.list_templates(templatefilter='executable', id=id)[0]
     except:
