@@ -37,6 +37,7 @@ setup(
                         'rbc-portforward=rbc_tools.portforward:main',
                         'rbc-egress=rbc_tools.egress:main',
                         'rbc-setup=rbc_tools.config:main',
+                        'rbc-inventory=rbc_tools.inventory:main',
                 ],
     }
 )

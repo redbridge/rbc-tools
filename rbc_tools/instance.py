@@ -4,6 +4,7 @@
 
 Usage:
   rbc-instances list [-n] [--short ] [--search=SEARCH] [--group=GROUP] [--tags=TAGS]  [-w NETWORK]
+  rbc-instances inventory [--all] [--list]
   rbc-instances get [-n] [-w NETWORK] INSTANCE
   rbc-instances destroy [-n] [-w NETWORK] INSTANCE
   rbc-instances stop [-n] [-w NETWORK] INSTANCE
@@ -28,6 +29,7 @@ Options:
   --search=SEARCH                    Search instances matching STRING
   --tags=TAGS                        List or add tags to instances. Tags should be
                                      specified in key/value pairs: tagkey:tagvalue,app:myapp
+  --all                              Include stopped instances in the inventory
   -i NUM --number=NUM                Number of instances to deploy [default: 1]
   -g GROUP --group=GROUP             Name of instance group
   -t TEMPLATE --template=TEMPLATE    Name of the template to use
@@ -178,6 +180,7 @@ def list_vms(c, args):
         sys.exit(1)
     return res
 
+
 def start_vm(c, id):
     try:
         res = c.start_virtualmachine(id=id)
@@ -302,6 +305,8 @@ def main():
         res = list_vms(c, args)
     elif args['get']:
         res = c.list_virtualmachines(name=args['INSTANCE'])
+    elif args['inventory']:
+        inventory(c, args)
     else:
         print "Unable to execute command"
         sys.exit(1)
