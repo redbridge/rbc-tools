@@ -24,6 +24,7 @@ Options:
 
 """
 import os, sys, time, hashlib, random, base64, operator, re, json, translitcodec, time
+import traceback
 from os import path
 from config import read_config
 from connection import conn
@@ -45,7 +46,7 @@ def update_cache(c, args):
         with open(args['--cache_file'], 'w') as f:
             f.write(i)
     except Exception as e:
-        print e
+        print "Error:%s" % traceback.format_exc()
         # if we can't update cache - just use the old one
         pass
     return True
@@ -115,13 +116,14 @@ def inventory(c, args):
         zones[i.zonename].append(i.nics[0].ipaddress)
     ret.update(zones)
     # tags
-    tags = dict.fromkeys(set([ ["tag_%s_%s" % (t.key, slugify(t.value)) for t in i.tags] for i in res if len(i.tags) > 0][0]), None)
-    for t in tags.keys():
-        tags[t] = []
-    for i in [ r for r in res if len(r.tags) > 0]:
-        for t in i.tags:
-            tags["tag_%s_%s" % (t.key, slugify(t.value))].append(i.nics[0].ipaddress)
-    ret.update(tags)
+    if len([["tag_%s_%s" % (t.key, slugify(t.value)) for t in i.tags] for i in res if len(i.tags) > 0]) > 0:
+        tags = dict.fromkeys(set([["tag_%s_%s" % (t.key, slugify(t.value)) for t in i.tags] for i in res if len(i.tags) > 0][0]), None)
+        for t in tags.keys():
+            tags[t] = []
+        for i in [ r for r in res if len(r.tags) > 0]:
+            for t in i.tags:
+                tags["tag_%s_%s" % (t.key, slugify(t.value))].append(i.nics[0].ipaddress)
+        ret.update(tags)
     account = { i.account: []}
     for i in [ r for r in res]:
         account[i.account].append(i.nics[0].ipaddress)
