@@ -52,6 +52,11 @@ Development of rbc-tools takes place on github (https://github.com/redbridge/rbc
 
 History
 =======
+0.3.3 (2015-05-04)
+------------------
+
+- Add an ansible inventory to rbc-tools
+
 0.3.2 (2015-04-02)
 -------------------
 
@@ -85,6 +90,7 @@ Credits
 Contributors
 ------------
 
-- `cldmnky <https://github.com/cldmnky>`_
+- `cldmnky <https://github.com/cldmnky>`
+- `eal <https://github.com/eal>`
 
 Please add yourself here alphabetically when you submit your first pull request.
