@@ -52,6 +52,10 @@ Development of rbc-tools takes place on github (https://github.com/redbridge/rbc
 
 History
 =======
+0.3.4 (2015-05-07)
+
+- Fix issue when tags are not used
+
 0.3.3 (2015-05-04)
 ------------------
 
