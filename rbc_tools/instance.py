@@ -4,7 +4,6 @@
 
 Usage:
   rbc-instances list [-n] [--short ] [--search=SEARCH] [--group=GROUP] [--tags=TAGS]  [-w NETWORK]
-  rbc-instances inventory [--all] [--list]
   rbc-instances get [-n] [-w NETWORK] INSTANCE
   rbc-instances destroy [-n] [-w NETWORK] INSTANCE
   rbc-instances stop [-n] [-w NETWORK] INSTANCE
@@ -305,8 +304,6 @@ def main():
         res = list_vms(c, args)
     elif args['get']:
         res = c.list_virtualmachines(name=args['INSTANCE'])
-    elif args['inventory']:
-        inventory(c, args)
     else:
         print "Unable to execute command"
         sys.exit(1)
