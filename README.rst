@@ -53,6 +53,7 @@ Development of rbc-tools takes place on github (https://github.com/redbridge/rbc
 History
 =======
 0.3.4 (2015-05-07)
+------------------
 
 - Fix issue when tags are not used
 
@@ -62,12 +63,12 @@ History
 - Add an ansible inventory to rbc-tools
 
 0.3.2 (2015-04-02)
--------------------
+------------------
 
 - Do not fail on network create if the command timeouts.
 
 0.3.0 (2015-02-10)
--------------------
+------------------
 
 - Use post for instances, this makes it possible to use up to 32K of user data
 
