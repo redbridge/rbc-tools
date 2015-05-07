@@ -2,18 +2,18 @@
 rbc-tools: Manage RedBridge Cloud
 =================================
 
-rbc-tools are command line tools for managing RedBridge Cloud.
+rbc-tools are command line tools for managing `RedBridge Cloud <https://cloud.redbridge.se/>`.
 
 Using rbc-tools you can manage instances, networks and othe compute resources in RBC.
 
 The tools are tested on MacOS X and Linux only at the moment, but should also work on Windows in a cygwin environment.
 
-*The tools are in a early beta stage* so please report any bugs to support@redbridge.se or as issues on `github <https://github.com/redbridge/rbc-tools/issues>`_
+*The tools are in a early beta stage* so please report any bugs to support@redbridge.se or as issues on `github <https://github.com/redbridge/rbc-tools/issues>`
 
 Getting started
 ---------------
 
-1. Register for an account on `RedBridge Portal <https://portal.redbridge.se/account/signup/>`_
+1. Register for an account on `RedBridge Portal <https://portal.redbridge.se/account/signup/>`
 2. Get your access key and secret key from your account page in the portal.
 3. Create a ~/.rbc/rbc.cfg file (in a terminal)::
 
